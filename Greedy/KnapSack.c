@@ -19,7 +19,7 @@ void swap(int arr[],int i,int j){
 void print(int  arr[],int p[],float f[],int n){
     printf("WEIGHT\tPROFIT\tTaken\n");
     for(int i=0;i<n;i++){
-        printf("%d\t%d\t%f\n",arr[i],p[i],f[i]);
+        printf("%d\t%d\t%.2f\n",arr[i],p[i],f[i]);
     }
     printf("\n");
 }
@@ -46,7 +46,7 @@ void printF(float arr[],int n){
             float b = w[i];
             float d = a/b;
             float f = c;
-            q[k++] = c;
+            q[k++] = c/b;
             profit = profit+(f*d);
             break;
             
@@ -68,6 +68,7 @@ int main()
     for(int i=0;i<7;i++){
         r[i] = p[i]/w[i];
     }
+
     for(int i=0;i<7;i++){
         for(int j=0;j<7-i-1;j++){
             if(r[j]<r[j+1]){
