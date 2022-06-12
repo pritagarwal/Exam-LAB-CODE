@@ -1,8 +1,9 @@
-include <stdbool.h>
+#include <stdbool.h>
 #include <stdio.h>
  
 
 #define V 4
+int f =0;
  
 void printSolution(int color[]);
 
@@ -16,32 +17,26 @@ bool isSafe(bool graph[V][V], int color[])
     return true;
 }
  
-bool graphColoring(bool graph[V][V], int m, int i,
+ void  graphColoring(bool graph[V][V], int m, int i,
                    int color[V])
 {
     
     if (i == V) {
        
         if (isSafe(graph, color)) {
-   
+            f=1;
             printSolution(color);
-            return true;
         }
-        return false;
+        return ;
     }
  
    
     for (int j = 1; j <= m; j++) {
-        color[i] = j;
- 
-       
-        if (graphColoring(graph, m, i + 1, color))
-            return true;
- 
-        color[i] = 0;
+         color[i] = j;
+         graphColoring(graph, m, i + 1, color);
+         color[i] = 0;
+        
     }
- 
-    return false;
 }
  
 
@@ -50,7 +45,7 @@ void printSolution(int color[])
     printf("Solution Exists:"
            " Following are the assigned colors \n");
     for (int i = 0; i < V; i++)
-        printf(" %d ", color[i]);
+        printf(" %c-->%d \n",i+65, color[i]);
     printf("\n");
 }
  
@@ -59,19 +54,19 @@ int main()
 {
 
     bool graph[V][V] = {
-        { 0, 1, 1, 1 },
-        { 1, 0, 1, 0 },
-        { 1, 1, 0, 1 },
-        { 1, 0, 1, 0 },
+        { 0, 1, 1, 0 },
+        { 1, 0, 0, 1 },
+        { 1, 0, 0, 1 },
+        { 0, 1, 1, 0 },
     };
-    int m = 3; // Number of colors
+    int m = 4; // Number of colors
  
     int color[V];
     for (int i = 0; i < V; i++)
         color[i] = 0;
- 
-    if (!graphColoring(graph, m, 0, color))
-        printf("Solution does not exist");
+      graphColoring(graph, m, 0, color);
+      if(f ==0)
+       printf("Solution does not exist");
  
     return 0;
 }
