@@ -1,10 +1,3 @@
-/******************************************************************************
-
-                            Online C Compiler.
-                Code, Compile, Run and Debug C program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
 
 #include <stdio.h>
 float q[7];
@@ -16,19 +9,14 @@ void swap(int arr[],int i,int j){
     arr[j] = t;
 }
 
-void print(int  arr[],int p[],float f[],int n){
-    printf("WEIGHT\tPROFIT\tTaken\n");
+void print(int id[],int arr[],int p[],float f[],int n){
+    printf("SL No.\tWEIGHT\tPROFIT\tTaken\n");
     for(int i=0;i<n;i++){
-        printf("%d\t%d\t%.2f\n",arr[i],p[i],f[i]);
+        printf("%d\t%d\t%d\t%.2f\n",id[i],arr[i],p[i],f[i]);
     }
     printf("\n");
 }
-void printF(float arr[],int n){
-    for(int i=0;i<n;i++){
-        printf("%f ",arr[i]);
-    }
-    printf("\n");  
-}
+
 
  float knapsack(int w[],int p[],float c,int i,int n){
     
@@ -61,6 +49,7 @@ void printF(float arr[],int n){
 
 int main()
 {
+    int id[] ={1,2,3,4,5,6,7};
     int w[] = {2,3,5,7,1,4,1};
     int p[] = {10,5,15,7,6,18,3};
     int c = 15;
@@ -74,20 +63,18 @@ int main()
             if(r[j]<r[j+1]){
                 swap(w,j,j+1);
                 swap(p,j,j+1);
+                swap(id,j,j+1);
                 float t = r[j];
                 r[j] = r[j+1];
                 r[j+1] = t;
             }
         }
     }
-      
-    
-    // print(p,7);
     
     float profit = knapsack(w,p,c,0,7);
     printf("MAX PROFIT :- %f\n",profit);
    
-   print(w,p,q,7);
+   print(id,w,p,q,7);
 
     return 0;
 }
